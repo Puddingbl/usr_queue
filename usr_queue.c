@@ -1,9 +1,9 @@
 #include "usr_queue.h"
 
 /**
-	*ï¿½ï¿½ï¿½Ð³ï¿½Ê¼ï¿½ï¿½
-	*@pram q ï¿½ï¿½Òªï¿½ï¿½Ê¼ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
-	*			 pArray  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½ï¿½ï¿½ï¿½
+	*¶ÓÁÐ³õÊ¼»¯
+	*@pram q ÐèÒª³õÊ¼»¯µÄ¶ÓÁÐ
+	*pArray  ´«¸ø¶ÓÁÐµÄÊý×é
 **/
 Q_Status queue_init(Queue_t *q, QElemType *pArray, uint8_t array_size, uint16_t item_size)
 {
@@ -28,7 +28,7 @@ void queue_clear(Queue_t *q)
 }
 
 /**
-	*ï¿½ï¿½ï¿½
+	*Èë¶Ó
 **/
 Q_Status queue_insert(Queue_t *q, QElemType e)
 {
@@ -44,7 +44,7 @@ Q_Status queue_insert(Queue_t *q, QElemType e)
 }
 
 /**
-	*ï¿½ï¿½ï¿½ï¿½
+	*³ö¶Ó
 **/
 Q_Status queue_extract(Queue_t *q, QElemType e)
 {
@@ -54,9 +54,7 @@ Q_Status queue_extract(Queue_t *q, QElemType e)
 	}
 
     memcpy(e, &q->data[q->front], q->itemsize);
-    // printf("e=%p\r\n", (uint8_t*)e); 
 	q->front = (q->front+1)%q->size;
 	
 	return Q_OK;
 }
-

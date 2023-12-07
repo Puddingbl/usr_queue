@@ -19,18 +19,17 @@ typedef enum
 }	Q_Status;
 
 typedef  void*     QElemType;
-//typedef  uint8_t     QElemDataType;
 
 typedef uint32_t QElemPointType;
 typedef uint8_t QElemDataType;
 
 typedef struct
 {
-	uint8_t front;         // 锟窖讹拷锟斤拷锟斤拷指锟斤拷
-	uint8_t rear;    			 // 锟斤拷锟斤拷锟斤拷锟斤拷指锟斤拷
-	uint8_t count;     		 // 锟杰癸拷锟叫讹拷锟斤拷锟斤拷锟斤拷
-	uint8_t size;         // 锟斤拷锟叫筹拷锟斤拷
-    uint16_t itemsize;    // 锟斤拷锟叫筹拷员锟斤拷小
+	uint8_t front;         // 已读数据指向
+	uint8_t rear;    			 // 已收数据指向
+	uint8_t count;     		 // 总共有多少数据
+	uint8_t size;         // 队列长度
+    uint16_t itemsize;    // 队列成员大小
 	QElemType *data;    
 } Queue_t;
 
