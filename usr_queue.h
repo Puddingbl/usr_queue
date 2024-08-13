@@ -9,7 +9,7 @@ extern "C" {
 /* includes ------------------------------------------------------------------*/
 #include <stdint.h>
 #include <string.h>
-
+#include "SWM341.h"
 /* define---------------------------------------------------------------------*/
 
 typedef enum 
@@ -23,23 +23,34 @@ typedef  void*     QElemType;
 typedef uint32_t QElemPointType;
 typedef uint8_t QElemDataType;
 
-typedef struct
-{
-	uint8_t front;         // 已读数据指向
-	uint8_t rear;    			 // 已收数据指向
-	uint8_t count;     		 // 总共有多少数据
-	uint8_t size;         // 队列长度
-    uint16_t itemsize;    // 队列成员大小
-	QElemType *data;    
+typedef struct {
+	uint16_t front;         // 已读数据指向
+	uint16_t rear;    		// 已收数据指向
+	uint16_t size;          // 队列长度
+//    uint16_t itemsize;      // 队列成员大小
+//	QElemType *data;    
+    
+    uint8_t *byte_buff;     // 字节缓存
+    void    **point_buff;   // 指针缓存
 } Queue_t;
+
+typedef struct {
+
+    uint16_t itemsize;      // 队列成员大小
+	QElemType *data;    
+} queue_ex_t;
 
 
 /* exported functions ------------------------------------------------------- */
-Q_Status queue_init(Queue_t *q, QElemType *pArray, uint8_t array_size, uint16_t item_size);
-uint8_t  queue_length(Queue_t q);
+Q_Status queue_point_init(Queue_t *q, void **pArray, uint16_t array_size);
+uint16_t  queue_length(Queue_t q);
 void queue_clear(Queue_t *q);
-Q_Status queue_insert(Queue_t *q, QElemType e);
-Q_Status queue_extract(Queue_t *q, QElemType e);
+Q_Status queue_point_insert(Queue_t *q, void *e);
+Q_Status queue_point_extract(Queue_t *q, void **e);
+
+Q_Status queue_byte_init(Queue_t *q, uint8_t *pArray, uint16_t array_size);
+Q_Status queue_byte_insert(Queue_t *q, uint8_t e);
+Q_Status queue_byte_extract(Queue_t *q, uint8_t *e);
 
 #ifdef __cplusplus
 }
